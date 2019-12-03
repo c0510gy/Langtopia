@@ -10,11 +10,14 @@ import overwrapSub
 import screenCapture
 import textRecog
 import textTranslator
+import screenFeatureSearch
 
 class OverwrapSubController(QWidget):
 
-    def __init__(self, parent=None):
+    def __init__(self, remoteToggle, parent=None):
         super().__init__(parent)
+
+        self.remoteToggle = remoteToggle
 
         self.setWindowFlags(Qt.FramelessWindowHint | Qt.WindowStaysOnTopHint)
         self.resize(200, 100)
@@ -44,6 +47,7 @@ class OverwrapSubController(QWidget):
         self.screen = screenCapture.ScreenCapture()
         self.textrecog = textRecog.TextRecog()
         self.trans = textTranslator.TextTranslator()
+        self.screenSearch = screenFeatureSearch.ScreenFeatureSearch()
 
         self.popups = []
 
@@ -60,6 +64,7 @@ class OverwrapSubController(QWidget):
         self.oldPos = event.globalPos()
 
     def quitClicked(self):
+        self.stop()
         self.close()
 
     def buttonClicked(self):
@@ -74,10 +79,22 @@ class OverwrapSubController(QWidget):
         self.overwrap = overwrapSub.OverwrapSub()
 
         text_str_list = []
-        for i in text_info_list:
-            text_str_list.append(i[4])
+        translated = []
+        indexes = []
+        for i in range(len(text_info_list)):
+            #print(text_info_list[i][4])
+            searched = self.screenSearch.search(text_info_list[i][4])
+            translated.append(searched)
+            if searched is None:
+                text_str_list.append(text_info_list[i][4])
+                indexes.append(i)
+            else:
+                translated[-1] = '✔️ ' + translated[-1]
+                print(searched)
 
-        translated = self.trans.translate_list(text_str_list) #[i[4] for i in text_info_list]
+        google_translated = self.trans.translate_list(text_str_list) #[i[4] for i in text_info_list]
+        for i in range(len(indexes)):
+            translated[indexes[i]] = google_translated[i]
 
         for i in range(len(text_info_list)):
             #translated = i[4] #self.trans.translate(i[4])
@@ -90,9 +107,13 @@ class OverwrapSubController(QWidget):
 
         self.overwrap.showFullScreen()
 
+    def stop(self):
+        self.remoteToggle()
+        self.destroy()
 
-app = QApplication(sys.argv)
-popup_control = OverwrapSubController()
-popup_control.show()
+if __name__ == '__main__':
+    app = QApplication(sys.argv)
+    popup_control = OverwrapSubController()
+    popup_control.show()
 
-sys.exit(app.exec_())
+    sys.exit(app.exec_())

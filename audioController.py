@@ -14,6 +14,7 @@ import audioCapture
 import audioFeatureSearch
 import textRecog
 import textTranslator
+import speechToText
 
 class AudioCaptureThread(QThread):
 
@@ -27,16 +28,34 @@ class AudioCaptureThread(QThread):
         self.wait()
 
     def run(self):
-        # your logic here
         self.audio.run()
+
+    def stop(self):
+        self.terminate()
+
+class SpeechRecognitionThread(QThread):
+
+    def __init__(self, speechHandler):
+        QThread.__init__(self)
+
+        self.audio = speechToText.SpeechToText(speechHandler)
+
+    def __del__(self):
+        self.audio.stop()
+        self.wait()
+
+    def run(self):
+        self.audio.start()
 
     def stop(self):
         self.terminate()
 
 class AudioSubController(QWidget):
 
-    def __init__(self, parent=None):
+    def __init__(self, remoteToggle, parent=None):
         super().__init__(parent)
+
+        self.remoteToggle = remoteToggle
 
         self.setWindowFlags(Qt.FramelessWindowHint | Qt.WindowStaysOnTopHint)
         self.resize(200, 100)
@@ -44,7 +63,12 @@ class AudioSubController(QWidget):
         self.setStyleSheet("background-color: BLACK; color: LIME; border: 1px solid black")
 
         self.label_title = QLabel()
-        self.label_title.setText('Audio Subtitles')
+        self.label_title.setText('Audio Subtitles - Sub recognition')
+
+        self.button_toggle = QToolButton()
+        self.button_toggle.setText('To speech recognition')
+        self.button_toggle.clicked.connect(self.toggleClicked)
+        self.button_toggle.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)  # 버튼 크기 일정하게
 
         self.button_translate = QToolButton()
         self.button_translate.setText('skip')
@@ -57,13 +81,15 @@ class AudioSubController(QWidget):
         self.button_quit.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
 
         self.gridlayout = QGridLayout()
-        self.gridlayout.addWidget(self.label_title, 0, 0, 1, 2)
-        self.gridlayout.addWidget(self.button_translate, 1, 0, 1, 1)
-        self.gridlayout.addWidget(self.button_quit, 1, 1, 1, 1)
+        self.gridlayout.addWidget(self.label_title, 0, 0, 1, 3)
+        self.gridlayout.addWidget(self.button_toggle, 1, 0, 1, 1)
+        self.gridlayout.addWidget(self.button_translate, 1, 1, 1, 1)
+        self.gridlayout.addWidget(self.button_quit, 1, 2, 1, 1)
 
         self.setLayout(self.gridlayout)
 
         self.audio = AudioCaptureThread(self.audioHandler)
+        self.speechAudio = SpeechRecognitionThread(self.speechHandler)
         self.audioSearch = audioFeatureSearch.AudioFeatureSearch()
         self.popup_sub = popupSub.PopupSub()
         #self.trans = textTranslator.TextTranslator()
@@ -72,7 +98,10 @@ class AudioSubController(QWidget):
 
         self.skip = False
 
+        self.currentMod = 1
+
         self.audio.start()
+        #self.speechAudio.start()
         self.showing = False
         self.popup_sub.showSub(0.8, ' ')
 
@@ -84,15 +113,19 @@ class AudioSubController(QWidget):
             if not self.showing:
                 self.showing = True
                 #self.audio.stop()
-                self.label_title.setText('Audio Subtitles\n' + self.audioSearch.info[idx])
-                self.popup_sub.showSub(0.8, self.audioSearch.info[idx])
+                self.label_title.setText('Audio Subtitles - Sub recognition\n' + self.audioSearch.getName(idx))
+                self.popup_sub.showSub(0.8, self.audioSearch.getName(idx))
                 self.skip = False
                 self.playSub(idx)
                 self.showing = False
                 #self.audio.start()
 
+    def speechHandler(self, dat):
+        #print('audio captured:', dat)
+        self.popup_sub.showSub(0.8, dat)
+
     def playSub(self, idx):
-        sub = self.audioSearch.subs[idx]
+        sub = self.audioSearch.getSubtitles(idx)
 
         st = time.time()
         for s in sub:
@@ -105,12 +138,12 @@ class AudioSubController(QWidget):
             if self.skip:
                 self.skip = False
                 self.popup_sub.showSub(0.8, ' ')
-                self.label_title.setText('Audio Subtitles')
+                self.label_title.setText('Audio Subtitles - Sub recognition')
                 break
 
         time.sleep(5)
         self.popup_sub.showSub(0.8, ' ')
-        self.label_title.setText('Audio Subtitles')
+        self.label_title.setText('Audio Subtitles - Sub recognition')
 
     def mousePressEvent(self, event):
         self.oldPos = event.globalPos()
@@ -122,14 +155,46 @@ class AudioSubController(QWidget):
         self.oldPos = event.globalPos()
 
     def quitClicked(self):
+        self.stop()
         self.close()
 
     def buttonClicked(self):
         self.skip = True
 
+    def toggleClicked(self):
+        if self.currentMod == 1:
+            self.skip = True
+            self.speechAudio = SpeechRecognitionThread(self.speechHandler)
 
-app = QApplication(sys.argv)
-audio_sub_control = AudioSubController()
-audio_sub_control.show()
+            self.audio.stop()
+            self.speechAudio.start()
+            self.currentMod = 2
 
-sys.exit(app.exec_())
+            self.popup_sub.showSub(0.8, ' ')
+            self.label_title.setText('Audio Subtitles - Speech recognition')
+            self.button_toggle.setText('To sub recognition')
+        else:
+            self.skip = False
+            self.showing = False
+            self.audio = AudioCaptureThread(self.audioHandler)
+
+            self.speechAudio.stop()
+            self.audio.start()
+            self.currentMod = 1
+
+            self.popup_sub.showSub(0.8, ' ')
+            self.label_title.setText('Audio Subtitles - Sub recognition')
+            self.button_toggle.setText('To speech recognition')
+
+    def stop(self):
+        self.remoteToggle()
+        self.audio.stop()
+        self.popup_sub.destroy()
+        self.destroy()
+
+if __name__ == '__main__':
+    app = QApplication(sys.argv)
+    audio_sub_control = AudioSubController()
+    audio_sub_control.show()
+
+    sys.exit(app.exec_())

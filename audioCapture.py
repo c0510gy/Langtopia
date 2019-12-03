@@ -13,6 +13,8 @@ class AudioCapture(object):
 
         self.handler = handler
 
+        self.isAborted = False
+
     def run(self):
         default_input = self.p.get_default_input_device_info()
         input_index = default_input['index']
@@ -28,7 +30,7 @@ class AudioCapture(object):
 
         dat = deque()
 
-        while True:
+        while not self.isAborted:
             data = np.fromstring(self.stream.read(CHUNK), dtype=np.int16)
             peak = np.average(np.abs(data)) * 2
 
@@ -41,6 +43,8 @@ class AudioCapture(object):
                 #self.handler.emit()
 
     def stop(self):
+        self.isAborted = True
+
         self.stream.stop_stream()
         self.stream.close()
         self.p.terminate()
