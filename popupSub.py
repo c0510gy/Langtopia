@@ -32,6 +32,11 @@ class PopupSub(QWidget):
 
         width = self.lbl.fontMetrics().boundingRect(self.lbl.text()).width()
         height = self.lbl.fontMetrics().boundingRect(self.lbl.text()).height()
+        if '\n' in text:
+            width = self.lbl.fontMetrics().boundingRect(self.lbl.text().split('\n')[0]).width()
+            width = max(width, self.lbl.fontMetrics().boundingRect(self.lbl.text().split('\n')[1]).width())
+            height *= 2
+
 
         centerPoint = QDesktopWidget().availableGeometry().center()
         # setGeometry() 순서 주의

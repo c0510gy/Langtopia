@@ -98,6 +98,12 @@ class Langtopia(QWidget):
 
         self.setFixedSize(600, 230)
 
+    def closeEvent(self, event):
+        # 강력한 종료 필요
+        self.screen_controller = None
+        self.audio_controller = None
+        self.destroy()
+
 
 app = QApplication(sys.argv)
 langtopia = Langtopia()

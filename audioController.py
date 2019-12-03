@@ -92,6 +92,7 @@ class AudioSubController(QWidget):
         self.speechAudio = SpeechRecognitionThread(self.speechHandler)
         self.audioSearch = audioFeatureSearch.AudioFeatureSearch()
         self.popup_sub = popupSub.PopupSub()
+        self.trans = textTranslator.TextTranslator()
         #self.trans = textTranslator.TextTranslator()
 
         self.oldPos = self.pos()
@@ -120,9 +121,10 @@ class AudioSubController(QWidget):
                 self.showing = False
                 #self.audio.start()
 
-    def speechHandler(self, dat):
+    def speechHandler(self, text):
         #print('audio captured:', dat)
-        self.popup_sub.showSub(0.8, dat)
+        translated = self.trans.translate(text)
+        self.popup_sub.showSub(0.8, text + '\n' + translated)
 
     def playSub(self, idx):
         sub = self.audioSearch.getSubtitles(idx)
