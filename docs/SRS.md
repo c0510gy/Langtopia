@@ -75,7 +75,7 @@ Audio Subtitles는 다음 두 가지 기능을 제공한다.
 
 ### 2.2. Screen Translator
 #### 2.2.1. Screen Translator 컨트롤러 화면
-![Screen_Translator_Window](./images/screenTraslate.png)
+![Screen_Translator_Window](./images/ScreenTraslate.png)
 * `ⓐ`: QLabel, 컨트롤러의 이름 명시한다.
 * `ⓑ`: QToolButton, 화면을 하나 이미지로 받고 이미지안에 글자를 찾아내서 번역한다.
 * `ⓒ`: QToolButton, 버튼이 눌리면 컨트롤러를 종료하고 창을 닫는다.
