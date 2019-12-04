@@ -65,6 +65,13 @@ Audio Subtitles는 다음 두 가지 기능을 제공한다.
 
 ## 2. 사용자 인터페이스 요구사항
 ### 2.1. Main 화면
+![Main_Window](./images/MainWindow.png)
+* `ⓐ`: QLabel, 아래 버튼이 Screen Translator를 수행하는 버튼임을 명시한다.
+* `ⓑ`: QLabel, 아래 버튼이 Audio subtitles를 수행하는 버튼임을 명시한다.
+* `ⓒ`: QToolButton, 토글 버튼으로써 버튼이 눌려있을 때 Screen Translator 컨트롤러 화면을 띄운다.
+* `ⓓ`: QToolButton, 토글 버튼으로써 버튼이 눌려있을 때 Audio Subtitles 컨트롤러 화면을 띄운다.
+* `ⓔ`: QLabel, 버전 정보
+* `ⓕ`: QToolButton, 설정 창으로 넘어가는 버튼
 
 ### 2.2. Screen Translator
 #### 2.2.1. Screen Translator 컨트롤러 화면
