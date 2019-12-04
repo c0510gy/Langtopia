@@ -86,9 +86,14 @@ Audio Subtitles는 다음 두 가지 기능을 제공한다.
 * `ⓒ`: 마우스가 눌렸을 때의 이벤트 핸들러를 오버라이딩하여 마우스가 눌리면 화면 번역을 중단한다.
 ### 2.3. Audio Subtitles
 #### 2.3.1. Audio Subtitles 컨트롤러 화면
-
+![Audio_Translator_Window](./images/AudioTranslate.png)
+* `ⓐ`: QLabel, 컨트롤러의 이름과 모드의 상태를 명시한다. 또한 자막 인식 모드일 경우 어떠한 영상 혹은 노래의 자막인지 표시한다.
+* `ⓑ`: QToolButton, 자막 인식 모드와 음성 인식 모드를 바꾸어 주는 버튼이다.
+* `ⓒ`: QToolButton, 자막 인식 모드에서 번역을 띄우지 않게 하는 버튼이다.
+* `ⓓ`: QToolButton, 버튼이 눌리면 컨트롤러를 종료하고 창을 닫는다.
 #### 2.3.2. 자막 출력 화면
-
+![Adio_Translate](./images/InputAudioScreen.png)
+* `ⓐ`: QLabel, 노래나 영상에 대한 자막을 띄워주거나 실시간으로 인식한 음성을 번역하여 화면에 출력한다.
 ## 3. 비기능적 요구사항
 ### 3.1. 개발 언어 및 사용할 외부 모듈 및 패키지
 * 개발 언어: `python 3.7`
