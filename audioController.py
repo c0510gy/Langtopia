@@ -194,6 +194,11 @@ class AudioSubController(QWidget):
         self.popup_sub.destroy()
         self.destroy()
 
+    def remoteStop(self):
+        self.audio.stop()
+        self.popup_sub.destroy()
+        self.destroy()
+
 if __name__ == '__main__':
     app = QApplication(sys.argv)
     audio_sub_control = AudioSubController()

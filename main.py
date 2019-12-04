@@ -25,11 +25,9 @@ class ToggleButton(QToolButton):
         self.controller = controller
         self.controller_instance = None
 
-        self.remote = False
-
     def remoteToggle(self):
-        self.remote = True
-        self.click()
+        self.toggle()
+        #self.click()
         #self.toggled.emit(False)
 
     def slot_toggle(self, state):
@@ -39,9 +37,7 @@ class ToggleButton(QToolButton):
             self.controller_instance = self.controller(self.remoteToggle)
             self.controller_instance.show()
         else:
-            if not self.remote:
-                self.controller_instance.stop()
-                self.remote = False
+            self.controller_instance.remoteStop()
             self.controller_instance = None
         self.setText({True: "ON", False: "OFF"}[state])
 
@@ -106,6 +102,8 @@ class Langtopia(QWidget):
 
 
 app = QApplication(sys.argv)
+app.setStyle('Fusion')
+
 langtopia = Langtopia()
 langtopia.show()
 

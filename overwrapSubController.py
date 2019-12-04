@@ -111,6 +111,9 @@ class OverwrapSubController(QWidget):
         self.remoteToggle()
         self.destroy()
 
+    def remoteStop(self):
+        self.destroy()
+
 if __name__ == '__main__':
     app = QApplication(sys.argv)
     popup_control = OverwrapSubController()
