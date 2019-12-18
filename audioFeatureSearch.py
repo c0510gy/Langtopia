@@ -11,15 +11,17 @@ class AudioFeatureSearch(object):
         self.thresholds = []
 
         self.infos = []
-        i = 0
-        while os.path.isfile(r'.\audioDatas\{}.pickle'.format(i)):
-            f = open(r'.\audioDatas\{}.pickle'.format(i), 'rb')
-            info = pickle.load(f)
-            f.close()
-            self.infos.append(info[:2])
-            feature_vectors.append(info[2][0])
-            self.thresholds.append(info[2][1])
-            i += 1
+        for file in os.listdir('./audioDatas/'):
+            if file.endswith('.pickle'):
+                fpath = os.path.join('./audioDatas/', file)
+
+                f = open(fpath, 'rb')
+                info = pickle.load(f)
+                f.close()
+
+                self.infos.append(info[:2])
+                feature_vectors.append(info[2][0])
+                self.thresholds.append(info[2][1])
 
         self.kd_tree = spatial.KDTree(feature_vectors)
 

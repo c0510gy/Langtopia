@@ -22,7 +22,7 @@ class OverwrapSubController(QWidget):
         self.setWindowFlags(Qt.FramelessWindowHint | Qt.WindowStaysOnTopHint)
         self.resize(200, 100)
         self.setWindowTitle('Langtopia - Screen Translator')
-        self.setStyleSheet("background-color: BLACK; color: LIME; border: 1px solid black")
+        #self.setStyleSheet("background-color: BLACK; color: LIME; border: 1px solid black")
 
         self.label_title = QLabel()
         self.label_title.setText('Screen Translator')

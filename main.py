@@ -1,23 +1,32 @@
 import sys
+import os
+import qdarkstyle
 from PyQt5 import QtGui
 from PyQt5.QtCore import Qt, QPoint
-from PyQt5.QtWidgets import QApplication, QWidget
+from PyQt5.QtWidgets import QApplication, QWidget, QColorDialog, QGroupBox, QListWidget, QFileDialog
 from PyQt5.QtWidgets import QLayout, QGridLayout, QSizePolicy, QHBoxLayout, QVBoxLayout
 from PyQt5.QtWidgets import QTextEdit, QLineEdit, QToolButton, QLabel, QPushButton
+from TabWidget import TabWidget
+
+from shutil import copyfile
 
 import overwrapSubController
 import audioController
 
+from settingWindow import SettingWindow
+
 class ToggleButton(QToolButton):
     def __init__(self, controller):
         super().__init__()
-        self.setText('OFF')
+        #self.setText('OFF')
         self.setFont(QtGui.QFont("맑은 고딕", 20, QtGui.QFont.Light))
+
+        self.setFixedSize(360, 176)
 
         self.setSizePolicy(
             QSizePolicy.Preferred,
             QSizePolicy.Expanding)
-        self.setStyleSheet("background-color: white")
+        self.setStyleSheet("background-image:url(./images/OFF.png);border:0px")
 
         self.setCheckable(True)
         self.toggled.connect(self.slot_toggle)
@@ -36,10 +45,12 @@ class ToggleButton(QToolButton):
         if state:
             self.controller_instance = self.controller(self.remoteToggle)
             self.controller_instance.show()
+            self.sender().setStyleSheet("background-image:url(./images/ON.png);border:0px")
         else:
             self.controller_instance.remoteStop()
             self.controller_instance = None
-        self.setText({True: "ON", False: "OFF"}[state])
+            self.sender().setStyleSheet("background-image:url(./images/OFF.png);border:0px")
+        #self.setText({True: "ON", False: "OFF"}[state])
 
 class ItemContainer(QVBoxLayout):
     def __init__(self, title, controller):
@@ -64,6 +75,8 @@ class Langtopia(QWidget):
         super().__init__(parent)
         self.setWindowTitle('Langtopia')
 
+        self.settingWindow = SettingWindow()
+
         self.screen_controller = overwrapSubController.OverwrapSubController
         self.audio_controller = audioController.AudioSubController
         self.toggle_screen = ItemContainer('Screen Translator', self.screen_controller)
@@ -77,9 +90,10 @@ class Langtopia(QWidget):
 
         self.label_version = QLabel()
         self.label_version.setText('Ver. 0.0.1')
-        self.button_setting = QToolButton()
+        self.button_setting = QPushButton()
         self.button_setting.setText('설정')
         self.button_setting.setMinimumSize(100, 30)
+        self.button_setting.clicked.connect(self.settingButtonClicked)
 
         self.hlayout2.addWidget(self.label_version)
         self.hlayout2.addStretch(1)
@@ -92,7 +106,10 @@ class Langtopia(QWidget):
 
         self.setLayout(self.vlayout)
 
-        self.setFixedSize(600, 230)
+        self.setFixedSize(800, 300)
+
+    def settingButtonClicked(self):
+        self.settingWindow.show()
 
     def closeEvent(self, event):
         # 강력한 종료 필요
@@ -102,7 +119,8 @@ class Langtopia(QWidget):
 
 
 app = QApplication(sys.argv)
-app.setStyle('Fusion')
+app.setStyleSheet(qdarkstyle.load_stylesheet_pyqt5())
+#app.setStyle('Fusion')
 
 langtopia = Langtopia()
 langtopia.show()
