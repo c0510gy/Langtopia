@@ -94,6 +94,13 @@ Audio Subtitles는 다음 두 가지 기능을 제공한다.
 #### 2.3.2. 자막 출력 화면
 ![Adio_Translate](./images/InputAudioScreen.png)
 * `ⓐ`: QLabel, 노래나 영상에 대한 자막을 띄워주거나 실시간으로 인식한 음성을 번역하여 화면에 출력한다.
+### 2.4 설정 화면
+#### Screen 번역, 오디오 자막 글씨 설정 화면
+![text_setting_window](./images/text_setting_window.png)
+* `ⓐ`: QTabWiget, tab이 왼쪽으로 나오게 설정 4개의 설정 화면 분리할 수 있게 했다.
+* `ⓑ`: QGroupBox 각각의 현재 어떤 상태인지를 나태내는 위젯과 색 변경을 위한 위젯을 나눈다.
+* `ⓒ`: Qlabel, 현재 색이 무슨 색인지 16 진법을 이용한 RGB값으로 나타낸다. 라벨의 배경색이 번역하는 글씨의 색이다.
+* `ⓓ`: QToolButton, 원하는 색을 선택할 수 있는 창을 뜨운다
 ## 3. 비기능적 요구사항
 ### 3.1. 개발 언어 및 사용할 외부 모듈 및 패키지
 * 개발 언어: `python 3.7`
