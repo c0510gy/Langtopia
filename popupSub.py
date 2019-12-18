@@ -29,7 +29,7 @@ class PopupSub(QWidget):
     def showSub(self, yrate, text):
         self.lbl.setText(text)
 
-        fsize = 20
+        fsize = 25
 
         self.lbl.setFont(QtGui.QFont("맑은 고딕", fsize, QtGui.QFont.Light))
 
@@ -40,6 +40,7 @@ class PopupSub(QWidget):
             width = max(width, self.lbl.fontMetrics().boundingRect(self.lbl.text().split('\n')[1]).width())
             height *= 2
 
+        width += 15
 
         centerPoint = QDesktopWidget().availableGeometry().center()
         # setGeometry() 순서 주의

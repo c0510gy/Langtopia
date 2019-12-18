@@ -60,6 +60,7 @@ class ItemContainer(QVBoxLayout):
         self.label_title.setText(title)
         self.label_title.setFont(QtGui.QFont("맑은 고딕", 20, QtGui.QFont.Light))
 
+
         self.button_toggle = ToggleButton(controller)
 
         self.addWidget(self.label_title)
