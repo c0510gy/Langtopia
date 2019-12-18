@@ -60,7 +60,7 @@ class AudioSubController(QWidget):
         self.setWindowFlags(Qt.FramelessWindowHint | Qt.WindowStaysOnTopHint)
         self.resize(200, 100)
         self.setWindowTitle('Langtopia - Audio Subtitles')
-        self.setStyleSheet("background-color: BLACK; color: LIME; border: 1px solid black")
+        #self.setStyleSheet("background-color: BLACK; color: LIME; border: 1px solid black")
 
         self.label_title = QLabel()
         self.label_title.setText('Audio Subtitles - Sub recognition')

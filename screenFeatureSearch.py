@@ -5,15 +5,17 @@ class ScreenFeatureSearch(object):
 
     def __init__(self):
         self.subMap = dict()
+        
+        for file in os.listdir('./screenDatas/'):
+            if file.endswith('.pickle'):
+                fpath = os.path.join('./screenDatas/', file)
 
-        i = 0
-        while os.path.isfile(r'.\screenDatas\{}.pickle'.format(i)):
-            f = open(r'.\screenDatas\{}.pickle'.format(i), 'rb')
-            features = pickle.load(f)
-            f.close()
-            for f in features:
-                self.subMap[f[0].strip()] = f[1]
-            i += 1
+                f = open(fpath, 'rb')
+                features = pickle.load(f)
+                f.close()
+
+                for f in features:
+                    self.subMap[f[0].strip()] = f[1]
 
     def search(self, text):
         if text.strip() in self.subMap:

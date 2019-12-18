@@ -5,6 +5,8 @@ from PyQt5.QtWidgets import QLayout, QGridLayout
 from PyQt5.QtWidgets import QTextEdit, QLineEdit, QToolButton, QLabel
 import sys
 
+from settingManager import settingManager
+
 class OverwrapSub(QWidget):
 
     def __init__(self, parent=None):
@@ -49,7 +51,8 @@ class OverwrapSub(QWidget):
         width = self.lbl.fontMetrics().boundingRect(self.lbl.text()).width()
         height = self.lbl.fontMetrics().boundingRect(self.lbl.text()).height()
         self.lbl.setFont(QtGui.QFont("맑은 고딕", fsize, QtGui.QFont.Light))
-        self.lbl.setStyleSheet('border: 2px solid black; border-radius: 10px; background-color: lightgray; color: TEAL')
+        self.lbl.setStyleSheet('border: 2px solid black; border-radius: 10px; background-color: {}; color: {}'\
+                               .format(settingManager.screenSetting['background_color'], settingManager.screenSetting['font_color']))
         self.lbl.setGeometry(x, y, width + 15, height + 5)
 
     def addSub(self, x, y, w, h, text):
@@ -93,7 +96,7 @@ class OverwrapSub(QWidget):
             painter.setOpacity(1)
             if self.selected == i:
                 painter.setOpacity(0.3)
-                painter.setBrush(QtGui.QBrush(Qt.yellow, Qt.SolidPattern))
+                painter.setBrush(QtGui.QBrush(QtGui.QColor(settingManager.screenSetting['selected_color']), Qt.SolidPattern))
             else:
                 painter.setBrush(Qt.transparent)
 

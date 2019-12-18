@@ -5,6 +5,8 @@ from PyQt5.QtWidgets import QLayout, QGridLayout
 from PyQt5.QtWidgets import QTextEdit, QLineEdit, QToolButton, QLabel
 import sys
 
+from settingManager import settingManager
+
 class PopupSub(QWidget):
 
     def __init__(self, parent=None):
@@ -19,14 +21,15 @@ class PopupSub(QWidget):
         self.setAttribute(Qt.WA_TranslucentBackground, True) #100% transparent
 
         self.lbl = QLabel(self)
-        self.lbl.setStyleSheet('background-color: black; color: white')
+        self.lbl.setStyleSheet('background-color: {}; color: {}'\
+                               .format(settingManager.audioSetting['background_color'], settingManager.audioSetting['font_color']))
         self.setGeometry(0, 0, 0, 0)
         self.show()
 
     def showSub(self, yrate, text):
         self.lbl.setText(text)
 
-        fsize = 20
+        fsize = 25
 
         self.lbl.setFont(QtGui.QFont("맑은 고딕", fsize, QtGui.QFont.Light))
 
@@ -37,6 +40,7 @@ class PopupSub(QWidget):
             width = max(width, self.lbl.fontMetrics().boundingRect(self.lbl.text().split('\n')[1]).width())
             height *= 2
 
+        width += 15
 
         centerPoint = QDesktopWidget().availableGeometry().center()
         # setGeometry() 순서 주의
