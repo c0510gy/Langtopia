@@ -2,8 +2,19 @@
 Langtopia is the software that helps you to understand any language on your computer screen or audio sounds from your computer.
 
 ## Software Project Ⅱ AD Project
+### 0. 시연 영상 및 자료
+#### 0.1. 프로젝트 수행 보고서
+* [요구사항명세서](./docs/SRS.md)
+* [소프트웨어 구조 설계서](./docs/ADS.md)
+* [소프트웨어 상세 설계서](./docs/DDS.md)
 
-### Team Infos
+#### 0.2. 발표 자료
+[소프트웨어 프로젝트2 AD Project 발표자료.pdf](./docs/소프트웨어%20프로젝트2%20AD%20Project%2004분반%203조.pdf)
+
+#### 0.3. 시연 영상
+[![YoutubeVid](http://img.youtube.com/vi/nfQMAQ8Ww1U/0.jpg)](http://www.youtube.com/watch?v=nfQMAQ8Ww1U)
+
+### 1. Team Infos
 
 * 팀명: 3조
 
@@ -14,7 +25,7 @@ Langtopia is the software that helps you to understand any language on your comp
 | 윤상건 | 20191632 |
 | 엄석현 | 20191623 |
 
-### About This Project
+### 2. About This Project
 
 * 프로젝트 이름: Langtopia
 
