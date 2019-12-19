@@ -84,6 +84,7 @@ Audio Subtitles는 다음 두 가지 기능을 제공한다.
 * `ⓐ`: 인식한 글자를 표시하기 위해서 칸을 그려 표시한다.
 * `ⓑ`: QLabel, 번역된 결과가 적혀있다. 투명한 상태를 유지하다가 마우스가 `ⓐ`에 범위 안에 올라가 있으면 투명한 상태를 푼다.
 * `ⓒ`: 마우스가 눌렸을 때의 이벤트 핸들러를 오버라이딩하여 마우스가 눌리면 화면 번역을 중단한다.
+
 ### 2.3. Audio Subtitles
 #### 2.3.1. Audio Subtitles 컨트롤러 화면
 ![Audio_Translator_Window](./images/AudioTranslate.png)
@@ -94,6 +95,20 @@ Audio Subtitles는 다음 두 가지 기능을 제공한다.
 #### 2.3.2. 자막 출력 화면
 ![Adio_Translate](./images/InputAudioScreen.png)
 * `ⓐ`: QLabel, 노래나 영상에 대한 자막을 띄워주거나 실시간으로 인식한 음성을 번역하여 화면에 출력한다.
+
+### 2.4 설정 화면
+#### 2.4.1. Screen 번역, 오디오 자막 글씨 설정 화면
+![text_setting_window](./images/text_setting_window.png)
+* `ⓐ`: QTabWiget, tab이 왼쪽으로 나오게 설정 4개의 설정 화면 분리할 수 있게 했다.
+* `ⓑ`: QGroupBox 각각의 현재 어떤 상태인지를 나태내는 위젯과 색 변경을 위한 위젯을 나눈다.
+* `ⓒ`: Qlabel, 현재 색이 무슨 색인지 16 진법을 이용한 RGB값으로 나타낸다. 라벨의 배경색이 번역하는 글씨의 색이다.
+* `ⓓ`: QToolButton, 원하는 색을 선택할 수 있는 창을 뜨운다.
+#### 2.4.2. 캡슐 설정 화면
+![manegement_setting_window](./images/manegemant_setting_window.png)
+* `ⓐ`: QListWiget, 현재 저장되어 있는 캡슐을 나타낸다.
+* `ⓑ`: QToolButton, 생성되어있는 캡슐을 삭제한다.
+* `ⓒ`: QToolButton, 캡슐을 추가할 수 있게 한다.
+
 ## 3. 비기능적 요구사항
 ### 3.1. 개발 언어 및 사용할 외부 모듈 및 패키지
 * 개발 언어: `python 3.7`
