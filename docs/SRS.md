@@ -105,7 +105,7 @@ Audio Subtitles는 다음 두 가지 기능을 제공한다.
 ![manegement_setting_window](./images/manegemant_setting_window.png)
 * `ⓐ`: QListWiget, 현재 저장되어 있는 캡슐을 나타낸다.
 * `ⓑ`: QToolButton, 생성되어있는 캡슐을 삭제한다.
-* `ⓒ`: QToolButton, 캡슐을 추가할 수 있는게 한다.
+* `ⓒ`: QToolButton, 캡슐을 추가할 수 있게 한다.
 ## 3. 비기능적 요구사항
 ### 3.1. 개발 언어 및 사용할 외부 모듈 및 패키지
 * 개발 언어: `python 3.7`
