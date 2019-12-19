@@ -6,7 +6,6 @@ Langtopia is the software that helps you to understand any language on your comp
 #### 0.1. 프로젝트 수행 보고서
 * [요구사항명세서](./docs/SRS.md)
 * [소프트웨어 구조 설계서](./docs/ADS.md)
-* [소프트웨어 상세 설계서](./docs/DDS.md)
 
 #### 0.2. 발표 자료
 [소프트웨어 프로젝트2 AD Project 발표자료.pdf](./docs/소프트웨어%20프로젝트2%20AD%20Project%2004분반%203조.pdf)
