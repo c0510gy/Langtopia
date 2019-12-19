@@ -34,14 +34,3 @@ class TabWidget(QtWidgets.QTabWidget):
         QtWidgets.QTabWidget.__init__(self, *args, **kwargs)
         self.setTabBar(TabBar(self))
         self.setTabPosition(QtWidgets.QTabWidget.West)
-
-class ProxyStyle(QtWidgets.QProxyStyle):
-    def drawControl(self, element, opt, painter, widget):
-        if element == QtWidgets.QStyle.CE_TabBarTabLabel:
-            ic = self.pixelMetric(QtWidgets.QStyle.PM_TabBarIconSize)
-            r = QtCore.QRect(opt.rect)
-            w =  0 if opt.icon.isNull() else opt.rect.width() + self.pixelMetric(QtWidgets.QStyle.PM_TabBarIconSize)
-            r.setHeight(opt.fontMetrics.width(opt.text) + w)
-            r.moveBottom(opt.rect.bottom())
-            opt.rect = r
-        QtWidgets.QProxyStyle.drawControl(self, element, opt, painter, widget)
