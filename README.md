@@ -39,3 +39,8 @@ Langtopia is the software that helps you to understand any language on your comp
         
         * 음성 인식: 컴퓨터에서 출력되는 음성을 인식하고 번역한 결과를 실시간으로 출력하는 기능
         
+### 3. 실행 환경
+
+* Audio Subtitles기능을 이용하기 위해서는, 윈도우 시스템 소리를 입력장치로 입력받기 위한 가상 오디오 케이블이 설치되어 있어야 한다.
+
+    * 개발중에 사용한 가상 오디오 케이블은 [VoiceMeeter](https://www.vb-audio.com/Voicemeeter/) 프로그램을 이용했다. 해당 프로그램을 설치하여 기본 재생 장치를 `VoiceMeeter Input`으로 두고 기본 녹음 장치를 `VoiceMeeter Output`으로 두면 된다.
