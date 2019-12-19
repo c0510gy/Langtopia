@@ -1,16 +1,11 @@
 import sys
-from PyQt5 import QtGui
 from PyQt5.QtCore import Qt, QPoint
 from PyQt5.QtWidgets import QApplication, QWidget
-from PyQt5.QtWidgets import QLayout, QGridLayout, QSizePolicy
-from PyQt5.QtWidgets import QTextEdit, QLineEdit, QToolButton, QLabel
+from PyQt5.QtWidgets import QGridLayout, QSizePolicy
+from PyQt5.QtWidgets import QToolButton, QLabel
 
-import popupSub
-import overwrapSub
-import screenCapture
-import textRecog
-import textTranslator
-import screenFeatureSearch
+from src import overwrapSub, screenFeatureSearch, textRecog, textTranslator, screenCapture
+
 
 class OverwrapSubController(QWidget):
 

@@ -1,11 +1,10 @@
 from PyQt5 import QtGui
 from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import QApplication, QWidget
-from PyQt5.QtWidgets import QLayout, QGridLayout
-from PyQt5.QtWidgets import QTextEdit, QLineEdit, QToolButton, QLabel
+from PyQt5.QtWidgets import QLabel
 import sys
 
-from settingManager import settingManager
+from src.settingManager import settingManager
 
 class OverwrapSub(QWidget):
 

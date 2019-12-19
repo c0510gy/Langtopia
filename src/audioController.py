@@ -1,20 +1,13 @@
 import sys
-import threading
 import time
 
-from PyQt5 import QtGui
 from PyQt5.QtCore import Qt, QPoint, QThread
 from PyQt5.QtWidgets import QApplication, QWidget
-from PyQt5.QtWidgets import QLayout, QGridLayout, QSizePolicy
-from PyQt5.QtWidgets import QTextEdit, QLineEdit, QToolButton, QLabel
+from PyQt5.QtWidgets import QGridLayout, QSizePolicy
+from PyQt5.QtWidgets import QToolButton, QLabel
 
-import popupSub
-import overwrapSub
-import audioCapture
-import audioFeatureSearch
-import textRecog
-import textTranslator
-import speechToText
+from src import audioFeatureSearch, audioCapture, popupSub, textTranslator, speechToText
+
 
 class AudioCaptureThread(QThread):
 

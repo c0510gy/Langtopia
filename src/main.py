@@ -1,19 +1,13 @@
 import sys
-import os
 import qdarkstyle
 from PyQt5 import QtGui
-from PyQt5.QtCore import Qt, QPoint
-from PyQt5.QtWidgets import QApplication, QWidget, QColorDialog, QGroupBox, QListWidget, QFileDialog
-from PyQt5.QtWidgets import QLayout, QGridLayout, QSizePolicy, QHBoxLayout, QVBoxLayout
-from PyQt5.QtWidgets import QTextEdit, QLineEdit, QToolButton, QLabel, QPushButton
-from TabWidget import TabWidget
+from PyQt5.QtWidgets import QApplication, QWidget
+from PyQt5.QtWidgets import QSizePolicy, QHBoxLayout, QVBoxLayout
+from PyQt5.QtWidgets import QToolButton, QLabel, QPushButton
 
-from shutil import copyfile
+from src import audioController, overwrapSubController
 
-import overwrapSubController
-import audioController
-
-from settingWindow import SettingWindow
+from src.settingWindow import SettingWindow
 
 class ToggleButton(QToolButton):
     def __init__(self, controller):

@@ -2,11 +2,11 @@ import os
 from PyQt5 import QtGui
 from PyQt5.QtWidgets import QWidget, QColorDialog, QGroupBox, QListWidget, QFileDialog, QMessageBox
 from PyQt5.QtWidgets import QGridLayout, QHBoxLayout, QVBoxLayout, QLabel, QPushButton
-from TabWidget import TabWidget
+from src.TabWidget import TabWidget
 
 from shutil import copyfile
 
-from settingManager import settingManager
+from src.settingManager import settingManager
 
 class SettingScreen(QWidget):
 
